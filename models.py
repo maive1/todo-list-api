@@ -1,15 +1,16 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-class Test(db.Model):
-    __tablename__='test'
+class Notes(db.Model):
+    __tablename__='notes'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    phone = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(25), nullable=False, unique=True)
+    todos = db.Column(db.String(200), nullable=False)
+    done = db.Column(db.Boolean)
 
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name,
-            "phone": self.phone
+            "username": self.username,
+            "todos": self.todos
         }
